@@ -1,0 +1,68 @@
+{% extends "cc/base.html" %} {% block main %}
+    <script type="text/javascript">
+        // got from django docs
+        // https://docs.djangoproject.com/en/3.1/ref/csrf/
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        const csrftoken = getCookie('csrftoken');
+
+        function addRep(rep) {
+            fetch('{% url 'cc:add_rep' %}', {
+                method: 'POST',
+                mode: 'same-origin',
+                cache: 'no-cache',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify(rep),
+            }).then(() => {
+                console.info('success')
+            })
+        }
+    </script>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <h1 class="mt-3 mb-3 ml-4">Representative List</h1>
+                <hr class="mt-0 mb-4">
+                {% for rep in rep_info_dict %}
+                    {% if rep.position.name %}
+                        <div class="card w-75 ml-4">
+                            <div class="card-body">
+                                <h4 class="card-title">{{ rep.name }}</h4>
+                                <h6 class="card-subtitle mb-2 text-muted">{{ rep.party }}</h6>
+                                <p class="card-text lead">{{rep.position.name}}</p>
+                                {% if logged_in %}
+                                    <button type="button" onclick="addRep({{ rep }})" class="btn btn-primary btn-sm">Add {{ rep.name }} to profile</button> 
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        
+                        
+                    {% endif %}
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+{% endblock main %}

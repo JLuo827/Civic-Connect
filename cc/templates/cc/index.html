@@ -1,0 +1,68 @@
+{% extends "cc/base.html" %} {% block main %}
+
+    {% load static %}
+
+
+
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <img src="{% static 'cc/court.jpg' %}" class="w-100 img-fluid" alt="Responsive image"
+                     style="width:100%;">
+                <div id="animated-example" class="animated fadeIn">
+                    <h1 class="centered display-1">Welcome! </h1></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="media mt-2 mb-2">
+                    <img class="align-self-center mt-4 mr-3 px-4" style="max-width:50%;"
+                         src="{% static 'cc/representative.jpeg' %}" alt="Generic placeholder image">
+                    <div class="media-body">
+                        <h5 class="mt-4">Find your Representative</h5>
+                        <p>Search up your zip code to view your local representatives!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="media mt-2 mb-2">
+                    <img class="align-self-center mt-4 mr-3 px-4" style="max-width:50%;"
+                         src="{% static 'cc/scroll.png' %}" alt="Generic placeholder image">
+                    <div class="media-body">
+                        <h5 class="mt-4">Create a Message</h5>
+                        <p>Write letters you'd like to send to your representatives.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="w-100"></div>
+            <div class="col">
+                <div class="media">
+                    <img class="align-self-center mt-4 mr-3 px-4 mb-3 " style="max-width:50%;"
+                         src="{% static 'cc/share.png' %}" alt="Generic placeholder image">
+                    <div class="media-body">
+                        <h5 class="mb-3 mt-5">Share and View Messages</h5>
+                        <p>Look at what other people have wrote!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="media">
+                    <img class="align-self-center mt-4 mr-3 px-4 mb-3" style="max-width:50%;"
+                         src="{% static 'cc/mail.png' %}" alt="Generic placeholder image">
+                    <div class="media-body">
+                        <h5 class="mb-3 mt-5">Contact your representative!</h5>
+                        <p>Check our your representative's websites, social media, and more!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock main %}

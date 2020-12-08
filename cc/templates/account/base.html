@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <title>{% block head_title %}{% endblock %}</title>
+    <link rel="icon" href="{% static 'cc/favicon.png' %}" type="image/png"/>
+    {% block extra_head %}
+    {% endblock %}
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    
+        <a class="navbar-brand" href="{% url 'cc:index' %}">Civic Connect</a>
+
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'cc:index' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'cc:address' %}">Search Address</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'cc:submitMessage' %}">Submit a Message</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'cc:viewMessages' %}">Messages</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'cc:profile' %}">Profile</a>
+                </li>
+            </ul>
+
+
+            {% if user.is_authenticated %}
+                <span class="navbar-text">Logged-In as {{ user.username }}</span>
+                <a class="nav-link"
+                   href="{% url 'account_logout' %}">Logout</a>
+            {% else %}
+                <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+            {% endif %}
+        </div>
+
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <ul>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
+                        <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+
+    {% block content %}
+
+    <div class="container">
+        <div class="row">
+
+            {% if messages %}
+                <div>
+                    <strong>Messages:</strong>
+                    <ul>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+{% block extra_body %}
+{% endblock %}
+</body>
+</html>

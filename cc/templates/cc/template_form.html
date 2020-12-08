@@ -1,0 +1,21 @@
+{% extends "cc/base.html" %} {% block main %} {% load bootstrap4 %}
+
+<h1 class="mt-4 ml-4 pl-4">Submit a Message</h1>
+<p class="lead mt-3 ml-5">Begin by choosing a generic category, then a specific subject. 
+<br>After you submit a message, an admin will approve it before it appears in the Messages tab.</p>
+<div class = "ml-4 mr-4 pl-4 pr-5" style="width:auto;">
+    <form method="post">{% csrf_token %}
+        {% bootstrap_form form %}
+        <!--{% bootstrap_field form.subject %}-->
+
+        {% buttons %}
+        <button type="submit" class="btn btn-primary">
+        Save
+        </button>
+        {% endbuttons %}
+    </form>
+    <br>
+    <br>
+<div/>
+
+{% endblock main %}

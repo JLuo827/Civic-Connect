@@ -1,0 +1,27 @@
+{% extends "cc/base.html" %} {% block main %} {% load bootstrap4 %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <h1 class="mt-4 ml-4 pl-3">Find Your Representatives</h1>
+                <hr class="mt-0 mb-4">
+
+                <form action="{% url 'cc:address' %}" method="post">
+                    {% csrf_token %}
+                    {% if valid == False %}
+                    <p class="ml-4 font-weight-light"> Not a valid zip code. </p>
+                    {% endif %}
+                    <div class="ml-4 mr-4 pl-3">
+                        {% bootstrap_form form %}
+                        {% buttons %}
+                        <button type="submit" class="btn btn-primary">
+                        Search
+                        </button>
+                        {% endbuttons %}
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock main %}

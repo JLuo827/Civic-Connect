@@ -1,0 +1,18 @@
+.container {
+    position: relative;
+    /*text-align: center*/;
+    color: black;
+  }
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+ } 
